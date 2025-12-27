@@ -1,8 +1,5 @@
 const PORT = process.env.PORT || 3000;
-<<<<<<< HEAD
 
-=======
->>>>>>> dcdd98fcf03732b4df693fdf73ab52fbc32f8805
 const Student = require("./models/Student");
 
 const connectDB = require("./config/db");
