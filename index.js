@@ -1,12 +1,11 @@
-const PORT = process.env.PORT || 3000;
+
 
 const Student = require("./models/Student");
 
 const connectDB = require("./config/db");
-connectDB();
-
 const express = require("express");
 const app = express();
+connectDB();
 
 app.use(express.json());
 
@@ -31,6 +30,8 @@ app.post("/register", async (req, res) => {
   }
 });
 
+
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
