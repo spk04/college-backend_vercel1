@@ -43,20 +43,25 @@ async function register() {
   result.innerText = text;
 }
 
-/*
-    
+
 async function login() {
   const res = await fetch(baseUrl + "/login", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      username: logUser.value,
-      password: logPass.value
+      username: document.getElementById("logUser").value.trim(),
+      password: document.getElementById("logPass").value
     })
   });
-  result.innerText = await res.text();
+
+  const text = await res.text();
+  result.innerText = text;
+
+  if (res.status === 200) {
+    fetchStudentDetails(document.getElementById("logUser").value.trim());
+  }
 }
-*/
+
 
 async function fetchStudentDetails(username) {
   const res = await fetch(baseUrl + "/students/" + username);
