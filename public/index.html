@@ -6,29 +6,32 @@
 <body>
 
 <h2>Student Registration</h2>
-<input id="name" name="name" placeholder="Name">
-<input id="regUser" name="username" placeholder="Username">
-<input id="regPass" name="password" type="password" placeholder="Password">
-<input id="branch" name="branch" placeholder="Branch">
-<input id="year" name="year" type="number" placeholder="Year">
-<input id="cgpa" name="cgpa" type="number" step="0.01" placeholder="CGPA">
+<input id="name" placeholder="Name"><br>
+<input id="regUser" placeholder="Username"><br>
+<input id="regPass" type="password" placeholder="Password"><br>
+<input id="branch" placeholder="Branch"><br>
+<input id="year" type="number" placeholder="Year"><br>
+<input id="cgpa" type="number" step="0.01" placeholder="CGPA"><br>
 <button onclick="register()">Register</button>
 
+<hr>
 
 <h2>Student Login</h2>
-<input id="logUser" placeholder="Username">
-<input id="logPass" placeholder="Password" type="password">
+<input id="logUser" placeholder="Username"><br>
+<input id="logPass" type="password" placeholder="Password"><br>
 <button onclick="login()">Login</button>
 
-<h2>Update / Delete Profile</h2>
+<hr>
 
-<input id="updateCgpa" type="number" step="0.01" placeholder="New CGPA">
+<h2>Update / Delete Profile</h2>
+<input id="updateCgpa" type="number" step="0.01" placeholder="New CGPA"><br>
 <button onclick="updateProfile()">Update CGPA</button>
 
 <br><br>
 
 <button onclick="deleteProfile()">Delete My Account</button>
 
+<hr>
 
 <p id="result"></p>
 
@@ -48,75 +51,32 @@ async function register() {
       cgpa: Number(document.getElementById("cgpa").value)
     })
   });
-
-  async function updateProfile() {
-  const username = document.getElementById("logUser").value.trim();
-  const newCgpa = Number(document.getElementById("updateCgpa").value);
-
-  if (!username || !newCgpa) {
-    result.innerText = "Enter username and new CGPA";
-    return;
-  }
-
-  const res = await fetch(baseUrl + "/students/" + username, {
-    method: "PATCH",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      cgpa: newCgpa
-    })
-  });
-
-  result.innerText = await res.text();
+  document.getElementById("result").innerText = await res.text();
 }
-
-async function deleteProfile() {
-  const username = document.getElementById("logUser").value.trim();
-
-  if (!username) {
-    result.innerText = "Enter username to delete";
-    return;
-  }
-
-  const confirmDelete = confirm("Are you sure you want to delete your account?");
-  if (!confirmDelete) return;
-
-  const res = await fetch(baseUrl + "/students/" + username, {
-    method: "DELETE"
-  });
-
-  result.innerText = await res.text();
-}
-
-
-  const text = await res.text();
-  result.innerText = text;
-}
-
 
 async function login() {
+  const username = document.getElementById("logUser").value.trim();
+  const password = document.getElementById("logPass").value;
+
   const res = await fetch(baseUrl + "/login", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      username: document.getElementById("logUser").value.trim(),
-      password: document.getElementById("logPass").value
-    })
+    body: JSON.stringify({ username, password })
   });
 
   const text = await res.text();
-  result.innerText = text;
+  document.getElementById("result").innerText = text;
 
   if (res.status === 200) {
-    fetchStudentDetails(document.getElementById("logUser").value.trim());
+    fetchStudentDetails(username);
   }
 }
-
 
 async function fetchStudentDetails(username) {
   const res = await fetch(baseUrl + "/students/" + username);
   const data = await res.json();
 
-  result.innerHTML = `
+  document.getElementById("result").innerHTML = `
     <h3>Student Profile</h3>
     <p><b>Name:</b> ${data.name}</p>
     <p><b>Username:</b> ${data.username}</p>
@@ -126,6 +86,34 @@ async function fetchStudentDetails(username) {
   `;
 }
 
+async function updateProfile() {
+  alert("Update CGPA clicked"); // 🔥 DEBUG LINE
+
+  const username = document.getElementById("logUser").value.trim();
+  const cgpa = Number(document.getElementById("updateCgpa").value);
+
+  const res = await fetch(baseUrl + "/students/" + username, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ cgpa })
+  });
+
+  document.getElementById("result").innerText = await res.text();
+}
+
+async function deleteProfile() {
+  alert("Delete clicked"); // 🔥 DEBUG LINE
+
+  const username = document.getElementById("logUser").value.trim();
+
+  if (!confirm("Are you sure you want to delete your account?")) return;
+
+  const res = await fetch(baseUrl + "/students/" + username, {
+    method: "DELETE"
+  });
+
+  document.getElementById("result").innerText = await res.text();
+}
 </script>
 
 </body>
