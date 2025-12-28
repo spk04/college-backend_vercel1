@@ -1,18 +1,13 @@
 {
-  "name": "college",
+  "name": "college-backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "College backend API using Node.js and MongoDB",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
   "dependencies": {
-    "express": "^5.2.1",
-    "mongodb": "^7.0.0",
-    "mongoose": "^9.0.2"
+    "express": "^4.18.2",
+    "mongoose": "^8.0.0"
   }
 }
