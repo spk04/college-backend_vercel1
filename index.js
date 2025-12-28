@@ -10,9 +10,6 @@ app.use(express.static("public"));
 
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.send("College Backend Running");
-});
 
 app.post("/register", async (req, res) => {
   try {
