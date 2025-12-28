@@ -54,6 +54,47 @@ app.post("/login", async (req, res) => {
 });
 
 
+app.patch("/students/:username", async (req, res) => {
+  try {
+    const { cgpa } = req.body;
+
+    const student = await Student.findOneAndUpdate(
+      { username: req.params.username },
+      { cgpa: cgpa },
+      { new: true }
+    );
+
+    if (!student) {
+      return res.status(404).send("Student not found");
+    }
+
+    res.status(200).send("CGPA updated successfully");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Failed to update CGPA");
+  }
+});
+
+
+app.delete("/students/:username", async (req, res) => {
+  try {
+    const student = await Student.findOneAndDelete({
+      username: req.params.username
+    });
+
+    if (!student) {
+      return res.status(404).send("Student not found");
+    }
+
+    res.status(200).send("Student account deleted successfully");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Failed to delete account");
+  }
+});
+
+
+
 app.get("/students/:username", async (req, res) => {
   try {
     const student = await Student.findOne(
