@@ -30,12 +30,12 @@ async function register() {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      name: name.value,
-      username: regUser.value,
-      password: regPass.value,
-      branch: branch.value,
-      year: Number(year.value),
-      cgpa: Number(cgpa.value)
+      name: document.getElementById("name").value.trim(),
+      username: document.getElementById("regUser").value.trim(),
+      password: document.getElementById("regPass").value,
+      branch: document.getElementById("branch").value.trim(),
+      year: Number(document.getElementById("year").value),
+      cgpa: Number(document.getElementById("cgpa").value)
     })
   });
 
