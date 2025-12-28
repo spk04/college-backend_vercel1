@@ -13,6 +13,7 @@ app.use(express.json());
 
 app.post("/register", async (req, res) => {
   try {
+    console.log(req.body);
     const { name, username, password, branch, year, cgpa } = req.body;
 
     const student = new Student({

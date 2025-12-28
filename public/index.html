@@ -34,8 +34,8 @@ async function register() {
       username: regUser.value,
       password: regPass.value,
       branch: branch.value,
-      year: year.value,
-      cgpa: cgpa.value
+      year: Number(year.value),
+      cgpa: Number(cgpa.value)
     })
   });
   result.innerText = await res.text();
