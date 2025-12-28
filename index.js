@@ -6,6 +6,7 @@ const Student = require("./models/Student");
 const app = express();
 
 connectDB();
+app.use(express.static("public"));
 
 app.use(express.json());
 

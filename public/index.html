@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>College Student Portal</title>
+</head>
+<body>
+
+<h2>Student Registration</h2>
+<input id="regUser" placeholder="Username">
+<input id="regPass" placeholder="Password" type="password">
+<button onclick="register()">Register</button>
+
+<h2>Student Login</h2>
+<input id="logUser" placeholder="Username">
+<input id="logPass" placeholder="Password" type="password">
+<button onclick="login()">Login</button>
+
+<p id="result"></p>
+
+<script>
+const baseUrl = "https://college-backend-api-g4c2hmbkaub0huh8.centralindia-01.azurewebsites.net";
+
+async function register() {
+  const res = await fetch(baseUrl + "/register", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      username: regUser.value,
+      password: regPass.value
+    })
+  });
+  result.innerText = await res.text();
+}
+
+async function login() {
+  const res = await fetch(baseUrl + "/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      username: logUser.value,
+      password: logPass.value
+    })
+  });
+  result.innerText = await res.text();
+}
+</script>
+
+</body>
+</html>
