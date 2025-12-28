@@ -13,7 +13,7 @@ app.use(express.json());
 
 app.post("/register", async (req, res) => {
   try {
-    console.log(req.body);
+    console.log("Incoming body:", req.body);
     const { name, username, password, branch, year, cgpa } = req.body;
 
     const student = new Student({
@@ -29,7 +29,8 @@ app.post("/register", async (req, res) => {
 
     res.status(201).send("Student registered successfully");
   } catch (error) {
-    res.status(500).send("Registration failed");
+    console.error("REGISTER ERROR:", error); // 👈 IMPORTANT
+    res.status(500).send(error.message); 
   }
 });
 

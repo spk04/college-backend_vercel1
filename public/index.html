@@ -38,7 +38,9 @@ async function register() {
       cgpa: Number(cgpa.value)
     })
   });
-  result.innerText = await res.text();
+
+  const text = await res.text();
+  result.innerText = text();
 }
 
 <!--
