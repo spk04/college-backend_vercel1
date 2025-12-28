@@ -13,11 +13,15 @@ app.use(express.json());
 
 app.post("/register", async (req, res) => {
   try {
-    const { username, password } = req.body;
+    const { name, username, password, branch, year, cgpa } = req.body;
 
     const student = new Student({
+      name,
       username,
-      password
+      password,
+      branch,
+      year,
+      cgpa
     });
 
     await student.save();
@@ -27,6 +31,7 @@ app.post("/register", async (req, res) => {
     res.status(500).send("Registration failed");
   }
 });
+
 
 
 app.post("/login", async (req, res) => {
@@ -44,6 +49,26 @@ app.post("/login", async (req, res) => {
     res.status(500).send("Login failed");
   }
 });
+
+
+app.get("/students/:username", async (req, res) => {
+  try {
+    const student = await Student.findOne(
+      { username: req.params.username },
+      { password: 0 } // hide password
+    );
+
+    if (!student) {
+      return res.status(404).send("Student not found");
+    }
+
+    res.status(200).json(student);
+  } catch (error) {
+    res.status(500).send("Failed to fetch student details");
+  }
+});
+
+
 
 const PORT = process.env.PORT || 3000;
 
