@@ -30,7 +30,7 @@ app.post("/register", async (req, res) => {
 
     res.status(201).send("Student registered successfully");
   } catch (error) {
-    console.error("REGISTER ERROR:", error); // 👈 IMPORTANT
+    console.error("REGISTER ERROR:", error); 
     res.status(500).send(error.message); 
   }
 });
