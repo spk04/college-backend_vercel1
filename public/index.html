@@ -36,7 +36,7 @@
 <p id="result"></p>
 
 <script>
-const baseUrl = "https://college-backend-api-g4c2hmbkaub0huh8.centralindia-01.azurewebsites.net";
+const baseUrl = "👉🏻YOUR PUBLIC IP👈🏻";
 
 async function register() {
   const res = await fetch(baseUrl + "/register", {
@@ -87,7 +87,7 @@ async function fetchStudentDetails(username) {
 }
 
 async function updateProfile() {
-  alert("Update CGPA clicked"); // 🔥 DEBUG LINE
+  alert("Update CGPA clicked"); 
 
   const username = document.getElementById("logUser").value.trim();
   const cgpa = Number(document.getElementById("updateCgpa").value);
@@ -102,7 +102,7 @@ async function updateProfile() {
 }
 
 async function deleteProfile() {
-  alert("Delete clicked"); // 🔥 DEBUG LINE
+  alert("Delete clicked"); 
 
   const username = document.getElementById("logUser").value.trim();
 
